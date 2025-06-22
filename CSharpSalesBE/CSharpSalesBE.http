@@ -1,0 +1,10 @@
+@CSharpSalesBE_HostAddress = http://localhost:5263
+
+POST {{CSharpSalesBE_HostAddress}}/Sales/GetCartResponse
+Content-Type: application/json
+
+{
+  "items": ["1 book at 12.49"]
+}
+
+###
