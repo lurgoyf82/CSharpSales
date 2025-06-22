@@ -1,11 +1,11 @@
 
-using CSharpSalesBE.Handlers;
-using CSharpSalesBE.Services;
+using CSharpSales.Handlers;
+using CSharpSales.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 
-namespace CSharpSalesBE
+namespace CSharpSales
 {
     public class Program
     {
@@ -32,7 +32,7 @@ namespace CSharpSalesBE
             {
                 options.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "CSharpSalesBE API",
+                    Title = "CSharpSales API",
                     Version = "v1"
                 });
                 options.ExampleFilters();
@@ -52,7 +52,7 @@ namespace CSharpSalesBE
                 app.UseSwagger();
                 app.UseSwaggerUI(options =>
                 {
-                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "CSharpSalesBE API v1");
+                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "CSharpSales API v1");
                 });
             }
 

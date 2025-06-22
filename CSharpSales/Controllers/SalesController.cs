@@ -1,11 +1,11 @@
-﻿using CSharpSalesBE.Models.DTO.Requests.CartRequests;
-using CSharpSalesBE.Models.DTO.Responses.CartResponses;
+﻿using CSharpSales.Models.DTO.Requests.CartRequests;
+using CSharpSales.Models.DTO.Responses.CartResponses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Filters;
 using System.Net;
 
-namespace CSharpSalesBE.Controllers
+namespace CSharpSales.Controllers
 {
     [ApiController]
     [Route("[controller]")]

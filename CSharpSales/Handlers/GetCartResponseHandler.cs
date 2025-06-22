@@ -1,10 +1,10 @@
-using CSharpSalesBE.Models.DTO.Requests.CartRequests;
-using CSharpSalesBE.Models.DTO.Responses.CartResponses;
-using CSharpSalesBE.Models.Entities;
-using CSharpSalesBE.Services;
+using CSharpSales.Models.DTO.Requests.CartRequests;
+using CSharpSales.Models.DTO.Responses.CartResponses;
+using CSharpSales.Models.Entities;
+using CSharpSales.Services;
 using MediatR;
 
-namespace CSharpSalesBE.Handlers
+namespace CSharpSales.Handlers
 {
     public class GetCartResponseHandler : IRequestHandler<AddItemsToCartRequestDto, GetCartResponseDto>
     {

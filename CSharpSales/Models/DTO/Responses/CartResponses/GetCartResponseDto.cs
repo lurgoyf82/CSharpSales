@@ -1,4 +1,4 @@
-﻿namespace CSharpSalesBE.Models.DTO.Responses.CartResponses
+﻿namespace CSharpSales.Models.DTO.Responses.CartResponses
 {
     public class GetCartResponseDto
     {

@@ -1,4 +1,4 @@
-﻿namespace CSharpSalesBE.Models.Entities
+﻿namespace CSharpSales.Models.Entities
 {
     public static class Taxes
     {

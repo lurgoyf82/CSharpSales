@@ -1,11 +1,11 @@
-﻿using CSharpSalesBE.Models.Entities;
-using CSharpSalesBE.Services;
+﻿using CSharpSales.Models.Entities;
+using CSharpSales.Services;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace CSharpSalesBE.Services
+namespace CSharpSales.Services
 {
     public class InputParser
     {

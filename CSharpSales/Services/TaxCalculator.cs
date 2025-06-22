@@ -1,7 +1,7 @@
-﻿using CSharpSalesBE.Models.Entities;
+﻿using CSharpSales.Models.Entities;
 using System;
 
-namespace CSharpSalesBE.Services
+namespace CSharpSales.Services
 {
     public class TaxCalculator
     {

@@ -1,7 +1,7 @@
-﻿using CSharpSalesBE.Models.DTO.Responses.CartResponses;
+﻿using CSharpSales.Models.DTO.Responses.CartResponses;
 using MediatR;
 
-namespace CSharpSalesBE.Models.DTO.Requests.CartRequests
+namespace CSharpSales.Models.DTO.Requests.CartRequests
 {
     public class AddItemsToCartRequestDto : IRequest<GetCartResponseDto>
     {

@@ -1,8 +1,8 @@
-﻿using CSharpSalesBE.Models.DTO.Responses.CartResponses;
-using CSharpSalesBE.Models.Entities;
+﻿using CSharpSales.Models.DTO.Responses.CartResponses;
+using CSharpSales.Models.Entities;
 using System;
 
-namespace CSharpSalesBE.Services
+namespace CSharpSales.Services
 {
     public class CartOutputFormatter
     {
