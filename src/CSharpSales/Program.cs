@@ -1,6 +1,7 @@
 
 using CSharpSales.Handlers;
 using CSharpSales.Services;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
@@ -12,6 +13,7 @@ namespace CSharpSales
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            ConfigurationManager configuration = builder.Configuration;
 
             // Add services to the container.
 
@@ -40,6 +42,42 @@ namespace CSharpSales
             builder.Services.AddSwaggerExamplesFromAssemblyOf<Program>();
 
 
+
+
+
+
+
+
+
+            string[] allowedEndpoints = configuration
+                .GetSection("Client:Endpoints")
+                .GetChildren()
+                .Select(x => x.Value ?? string.Empty)
+                .ToArray();
+
+            builder.Services.AddCors(cors =>
+            {
+                cors.AddPolicy("AllowOrigins", options =>
+                {
+                    options.WithOrigins(allowedEndpoints)
+                        .SetIsOriginAllowed(host => true)
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials();
+                });
+            });
+
+
+
+
+
+
+
+
+
+
+
+
             //// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             //builder.Services.AddOpenApi();
 
@@ -60,6 +98,7 @@ namespace CSharpSales
 
             app.UseAuthorization();
 
+            app.UseCors("AllowOrigins");
 
             app.MapControllers();
 

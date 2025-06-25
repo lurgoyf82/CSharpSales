@@ -29,7 +29,15 @@ namespace CSharpSales.Handlers
 
             if (request == null || request.Items == null || !request.Items.Any())
             {
-                throw new ArgumentException("Request cannot be null or empty.");
+                //throw new ArgumentException("Request cannot be null or empty.");
+                // Return an error response instead of throwing
+                return new GetCartResponseDto
+                {
+                    Items = new List<string>(),
+                    SalesTaxes = 0m,
+                    Total = 0m,
+                    Error = "Request cannot be null or empty."
+                };
             }
 
             var cart = new Cart();
