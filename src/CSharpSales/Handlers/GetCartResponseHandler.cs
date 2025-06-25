@@ -31,25 +31,28 @@ namespace CSharpSales.Handlers
             {
                 //throw new ArgumentException("Request cannot be null or empty.");
                 // Return an error response instead of throwing
-                return new GetCartResponseDto
+                return await Task.FromResult(new GetCartResponseDto
                 {
                     Items = new List<string>(),
                     SalesTaxes = 0m,
                     Total = 0m,
                     Error = "Request cannot be null or empty."
-                };
+                });
             }
 
-            var cart = new Cart();
-
-            foreach (var itemText in request.Items)
+            return await Task.Run(() =>
             {
-                _inputParser.SetText(itemText);
-                var item = _inputParser.Parse();
-                _cartService.AddItem(cart, item);
-            }
+                var cart = new Cart();
 
-            return _outputFormatter.GetCartResponse(cart);
+                foreach (var itemText in request.Items)
+                {
+                    _inputParser.SetText(itemText);
+                    var item = _inputParser.Parse();
+                    _cartService.AddItem(cart, item);
+                }
+
+                return _outputFormatter.GetCartResponse(cart);
+            }, cancellationToken);
         }
     }
 }
