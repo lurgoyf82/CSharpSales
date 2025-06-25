@@ -1,4 +1,4 @@
-name: Deploy .NET9 App
+name: Deploy CSharpSales .NET9 App
 
 on:
   push:
@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Setup .NET 9
         uses: actions/setup-dotnet@v4
         with:
@@ -35,4 +35,4 @@ jobs:
           username: deployer
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            sudo systemctl restart myapp.service
+            sudo systemctl restart csharpsales.service
