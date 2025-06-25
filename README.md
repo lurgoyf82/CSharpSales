@@ -48,6 +48,18 @@ And this should be returned:
 * **HTTP file** – the repository also contains `CSharpSales.http` which can be used with the Visual Studio HTTP client.
 * **Angular frontend** – a simple client application is planned and will be added soon.
 
+
+### Automated Deployment
+
+This application is automatically deployed via a GitHub Actions pipeline configured in `.github/workflows/deploy.yml`.
+Each push to the `master` branch triggers the build and deploy steps:
+
+1. **Build and Publish:** Compiles the .NET9 application.
+2. **Deploy via SSH:** Copies the published binaries to the production server.
+3. **Service Restart:** Restarts the application on the server via SSH.
+
+The deployment pipeline ensures continuous delivery of the latest version directly to the production environment.
+
 ## License
 
 This project is released under the MIT License. See `LICENSE.txt` for details.
