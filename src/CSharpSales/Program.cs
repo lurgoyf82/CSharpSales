@@ -42,44 +42,39 @@ namespace CSharpSales
             builder.Services.AddSwaggerExamplesFromAssemblyOf<Program>();
 
 
-
-
-
-
-
-
-
-            string[] allowedEndpoints = configuration
-                .GetSection("Client:Endpoints")
-                .GetChildren()
-                .Select(x => x.Value ?? string.Empty)
-                .ToArray();
+            // CORS configuration
+            bool allowAll = configuration.GetValue<bool>("Client:AllowAll");
 
             builder.Services.AddCors(cors =>
             {
                 cors.AddPolicy("AllowOrigins", options =>
                 {
-                    options.WithOrigins(allowedEndpoints)
-                        .SetIsOriginAllowed(host => true)
-                        .AllowAnyMethod()
-                        .AllowAnyHeader()
-                        .AllowCredentials();
+
+                    if (allowAll)
+                    {
+                        options.AllowAnyOrigin()
+                               .AllowAnyMethod()
+                               .AllowAnyHeader();
+                    }
+                    else
+                    {
+                        string[] allowedEndpoints = configuration
+                            .GetSection("Client:Endpoints")
+                            .GetChildren()
+                            .Select(x => x.Value ?? string.Empty)
+                            .ToArray();
+
+                        options.WithOrigins(allowedEndpoints)
+                               .AllowAnyMethod()
+                               .AllowAnyHeader()
+                               .AllowCredentials();
+                    }
                 });
             });
 
 
-
-
-
-
-
-
-
-
-
-
             //// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-            //builder.Services.AddOpenApi();
+            builder.Services.AddOpenApi();
 
             var app = builder.Build();
 
