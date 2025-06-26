@@ -1,4 +1,4 @@
-@CSharpSales_HostAddress = http://localhost:5263
+@CSharpSales_HostAddress = https://localhost:5001
 
 POST {{CSharpSales_HostAddress}}/Sales/GetCartResponse
 Content-Type: application/json
