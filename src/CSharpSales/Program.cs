@@ -50,25 +50,30 @@ namespace CSharpSales
                 cors.AddPolicy("AllowOrigins", options =>
                 {
 
-                    if (allowAll)
-                    {
-                        options.AllowAnyOrigin()
-                               .AllowAnyMethod()
-                               .AllowAnyHeader();
-                    }
-                    else
-                    {
-                        string[] allowedEndpoints = configuration
-                            .GetSection("Client:Endpoints")
-                            .GetChildren()
-                            .Select(x => x.Value ?? string.Empty)
-                            .ToArray();
+                    options.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader();
 
-                        options.WithOrigins(allowedEndpoints)
-                               .AllowAnyMethod()
-                               .AllowAnyHeader()
-                               .AllowCredentials();
-                    }
+
+                    //if (allowAll)
+                    //{
+                    //    options.AllowAnyOrigin()
+                    //           .AllowAnyMethod()
+                    //           .AllowAnyHeader();
+                    //}
+                    //else
+                    //{
+                    //    string[] allowedEndpoints = configuration
+                    //        .GetSection("Client:Endpoints")
+                    //        .GetChildren()
+                    //        .Select(x => x.Value ?? string.Empty)
+                    //        .ToArray();
+
+                    //    options.WithOrigins(allowedEndpoints)
+                    //           .AllowAnyMethod()
+                    //           .AllowAnyHeader()
+                    //           .AllowCredentials();
+                    //}
                 });
             });
 
