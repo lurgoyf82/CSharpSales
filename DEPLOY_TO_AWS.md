@@ -51,7 +51,7 @@ Altre alternative (non trattate in dettaglio):
    eb deploy
    ```
    Al termine verrà fornito un URL pubblico 
-   (ad esempio `http://CSharpSales-env.eba-xyz.us-east-1.elasticbeanstalk.com`).
+   (ad esempio `http://sales-develop.us-east-1.elasticbeanstalk.com/`).
    L'API sarà raggiungibile all'endpoint `/GetCartResponse` di quell'URL.
 1. 
 5. **Gestire l'ambiente**
