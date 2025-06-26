@@ -23,11 +23,3 @@ jobs:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           region: us-east-1
-      - uses: einaregilsson/beanstalk-deploy@v21
-        with:
-          application_name: sales-develop
-          environment_name: Sales-develop-env
-          version_label: ${{ github.sha }}
-          region: us-east-1
-          deployment_package: publish/deploy.zip
-
