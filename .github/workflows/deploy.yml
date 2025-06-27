@@ -18,6 +18,8 @@ jobs:
           
       - name: Publish
         run: dotnet publish ./src/CSharpSales/CSharpSales.csproj -c Release -o publish
+        env:
+          EnableSwaggerOnServer: true
 
       - name: Deploy via SSH
         uses: appleboy/scp-action@master

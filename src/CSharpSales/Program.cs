@@ -1,8 +1,5 @@
-
 using CSharpSales.Handlers;
 using CSharpSales.Services;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 
@@ -85,7 +82,9 @@ namespace CSharpSales
 
 
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
+            if (app.Environment.IsDevelopment() ||
+                configuration.GetValue<bool>("EnableSwaggerOnServer"))
+
             {
                 app.UseSwagger();
                 app.UseSwaggerUI(options =>
