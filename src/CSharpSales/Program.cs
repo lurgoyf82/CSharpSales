@@ -83,7 +83,7 @@ namespace CSharpSales
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment() ||
-                configuration.GetValue<bool>("EnableSwaggerOnServer"))
+                configuration.GetValue<bool>("EnableSwagger"))
             {
                 app.UseSwagger();
                 app.UseSwaggerUI(options =>
