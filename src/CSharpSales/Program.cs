@@ -47,30 +47,30 @@ namespace CSharpSales
                 cors.AddPolicy("AllowOrigins", options =>
                 {
 
-                    options.AllowAnyOrigin()
-                           .AllowAnyMethod()
-                           .AllowAnyHeader();
+                    //options.AllowAnyOrigin()
+                    //       .AllowAnyMethod()
+                    //       .AllowAnyHeader();
 
 
-                    //if (allowAll)
-                    //{
-                    //    options.AllowAnyOrigin()
-                    //           .AllowAnyMethod()
-                    //           .AllowAnyHeader();
-                    //}
-                    //else
-                    //{
-                    //    string[] allowedEndpoints = configuration
-                    //        .GetSection("Client:Endpoints")
-                    //        .GetChildren()
-                    //        .Select(x => x.Value ?? string.Empty)
-                    //        .ToArray();
+                    if (allowAll)
+                    {
+                        options.AllowAnyOrigin()
+                               .AllowAnyMethod()
+                               .AllowAnyHeader();
+                    }
+                    else
+                    {
+                        string[] allowedEndpoints = configuration
+                            .GetSection("Client:Endpoints")
+                            .GetChildren()
+                            .Select(x => x.Value ?? string.Empty)
+                            .ToArray();
 
-                    //    options.WithOrigins(allowedEndpoints)
-                    //           .AllowAnyMethod()
-                    //           .AllowAnyHeader()
-                    //           .AllowCredentials();
-                    //}
+                        options.WithOrigins(allowedEndpoints)
+                               .AllowAnyMethod()
+                               .AllowAnyHeader()
+                               .AllowCredentials();
+                    }
                 });
             });
 
