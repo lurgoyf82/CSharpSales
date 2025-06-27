@@ -85,12 +85,18 @@ namespace CSharpSales
             if (app.Environment.IsDevelopment() ||
                 configuration.GetValue<bool>("EnableSwaggerOnServer"))
             {
-                app.UseSwagger();
-                app.UseSwaggerUI(options =>
-                {
-                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "CSharpSales API v1");
-                });
+                //app.UseSwagger();
+                //app.UseSwaggerUI(options =>
+                //{
+                //    options.SwaggerEndpoint("/swagger/v1/swagger.json", "CSharpSales API v1");
+                //});
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "CSharpSales API v1");
+            });
 
             //app.UseHttpsRedirection();
 
