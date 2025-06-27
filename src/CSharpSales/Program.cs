@@ -84,7 +84,6 @@ namespace CSharpSales
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment() ||
                 configuration.GetValue<bool>("EnableSwaggerOnServer"))
-
             {
                 app.UseSwagger();
                 app.UseSwaggerUI(options =>
@@ -93,7 +92,7 @@ namespace CSharpSales
                 });
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseAuthorization();
 
