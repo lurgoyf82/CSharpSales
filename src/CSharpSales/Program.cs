@@ -40,19 +40,11 @@ namespace CSharpSales
 
 
             // CORS configuration
-            bool allowAll = configuration.GetValue<bool>("Client:AllowAll");
-
             builder.Services.AddCors(cors =>
             {
                 cors.AddPolicy("AllowOrigins", options =>
                 {
-
-                    //options.AllowAnyOrigin()
-                    //       .AllowAnyMethod()
-                    //       .AllowAnyHeader();
-
-
-                    if (allowAll)
+                    if (configuration.GetValue<bool>("CORS:AllowAll"))
                     {
                         options.AllowAnyOrigin()
                                .AllowAnyMethod()
