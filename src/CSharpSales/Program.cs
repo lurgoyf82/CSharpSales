@@ -93,7 +93,7 @@ namespace CSharpSales
             }
 
 
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
 
             app.UseAuthorization();
 
