@@ -1,0 +1,25 @@
+on:
+  push:
+    branches: [ develop ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with: 
+          dotnet-version: '9.0.x'
+      - run: |
+          dotnet publish ./src/CSharpSales/CSharpSales.csproj -c Release -o publish
+          cd publish
+          zip -r deploy.zip .
+      - uses: einaregilsson/beanstalk-deploy@v21
+        with:
+          application_name: sales-develop
+          environment_name: Sales-develop-env
+          version_label: ${{ github.sha }}
+          deployment_package: publish/deploy.zip
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          region: us-east-1
