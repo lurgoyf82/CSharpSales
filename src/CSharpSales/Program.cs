@@ -1,8 +1,5 @@
-
 using CSharpSales.Handlers;
 using CSharpSales.Services;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 
@@ -43,14 +40,11 @@ namespace CSharpSales
 
 
             // CORS configuration
-            bool allowAll = configuration.GetValue<bool>("Client:AllowAll");
-
             builder.Services.AddCors(cors =>
             {
                 cors.AddPolicy("AllowOrigins", options =>
                 {
-
-                    if (allowAll)
+                    if (configuration.GetValue<bool>("CORS:AllowAll"))
                     {
                         options.AllowAnyOrigin()
                                .AllowAnyMethod()
@@ -80,7 +74,8 @@ namespace CSharpSales
 
 
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
+            if (app.Environment.IsDevelopment() ||
+                configuration.GetValue<bool>("EnableSwagger"))
             {
                 app.UseSwagger();
                 app.UseSwaggerUI(options =>
@@ -88,6 +83,7 @@ namespace CSharpSales
                     options.SwaggerEndpoint("/swagger/v1/swagger.json", "CSharpSales API v1");
                 });
             }
+
 
             app.UseHttpsRedirection();
 
