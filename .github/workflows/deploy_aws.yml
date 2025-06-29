@@ -14,12 +14,15 @@ jobs:
           dotnet publish ./src/CSharpSales/CSharpSales.csproj -c Release -o publish
           cd publish
           zip -r deploy.zip .
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
       - uses: einaregilsson/beanstalk-deploy@v21
         with:
-          application_name: sales-develop
-          environment_name: Sales-develop-env
+          application_name: CSharpSales
+          environment_name: CSharpSales-env
           version_label: ${{ github.sha }}
-          deployment_package: publish/deploy.zip
-          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           region: us-east-1
+          deployment_package: publish/deploy.zip
