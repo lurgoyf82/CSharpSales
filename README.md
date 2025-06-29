@@ -22,6 +22,8 @@ Several options are available to exercise the API:
 
 * **Swagger UI** – browse to `https://localhost:5001/swagger` after the app starts and invoke the endpoint directly from the documentation page.
 * **Postman** – send a POST request to `https://localhost:5001/GetCartResponse` then select raw body and finally select JSON.
+* **AWS** - http://sales-develop.us-east-1.elasticbeanstalk.com/GetCartResponse
+* **VM** - http://sales.raphp.net/GetCartResponse
 
 Example:
 
