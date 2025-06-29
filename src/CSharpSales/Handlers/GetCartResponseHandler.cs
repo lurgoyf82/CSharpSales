@@ -30,7 +30,7 @@ namespace CSharpSales.Handlers
             if (request?.Items == null || !request.Items.Any())
             {
                 //throw new ArgumentException("Request cannot be null or empty.");
-                return await ReturnError("La request è null o vuoda.");
+                return await ReturnError("La request è null o vuota.");
             }
                 
             var cart = new Cart();
