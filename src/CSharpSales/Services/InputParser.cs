@@ -34,7 +34,7 @@ namespace CSharpSales.Services
         public Item Parse()
         {
             if (string.IsNullOrWhiteSpace(_text))
-                throw new ArgumentException("Input text cannot be null or empty");
+                throw new ArgumentException("Il testo inserito è invalido.");
 
             //example: "3 box of imported chocolates at 11.25"
             var item = new Item();

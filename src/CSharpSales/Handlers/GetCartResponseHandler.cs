@@ -27,32 +27,42 @@ namespace CSharpSales.Handlers
         {
 
 
-            if (request == null || request.Items == null || !request.Items.Any())
+            if (request?.Items == null || !request.Items.Any())
             {
                 //throw new ArgumentException("Request cannot be null or empty.");
-                // Return an error response instead of throwing
-                return await Task.FromResult(new GetCartResponseDto
-                {
-                    Items = new List<string>(),
-                    SalesTaxes = 0m,
-                    Total = 0m,
-                    Error = "Request cannot be null or empty."
-                });
+                return await ReturnError("La request è null o vuota.");
             }
+                
+            var cart = new Cart();
 
-            return await Task.Run(() =>
+
+            try
             {
-                var cart = new Cart();
-
                 foreach (var itemText in request.Items)
                 {
                     _inputParser.SetText(itemText);
                     var item = _inputParser.Parse();
                     _cartService.AddItem(cart, item);
                 }
+            }
+            catch (ArgumentException ex)
+            {
+                return await ReturnError(ex.Message);
+            }
 
-                return _outputFormatter.GetCartResponse(cart);
-            }, cancellationToken);
+            GetCartResponseDto response = _outputFormatter.GetCartResponse(cart);
+            return await Task.FromResult(response);
+        }
+
+        private static async Task<GetCartResponseDto> ReturnError(string? message)
+        {
+            return await Task.FromResult(new GetCartResponseDto
+            {
+                Items = new List<string>(),
+                SalesTaxes = 0m,
+                Total = 0m,
+                Error = message
+            });
         }
     }
 }
