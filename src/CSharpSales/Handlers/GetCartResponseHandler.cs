@@ -34,7 +34,6 @@ namespace CSharpSales.Handlers
             }
                 
             var cart = new Cart();
-            var response = new GetCartResponseDto();
 
 
             try
@@ -46,12 +45,12 @@ namespace CSharpSales.Handlers
                     _cartService.AddItem(cart, item);
                 }
             }
-            catch (Exception ex)
+            catch (ArgumentException ex)
             {
                 return await ReturnError(ex.Message);
             }
 
-            response = _outputFormatter.GetCartResponse(cart);
+            GetCartResponseDto response = _outputFormatter.GetCartResponse(cart);
             return await Task.FromResult(response);
         }
 
