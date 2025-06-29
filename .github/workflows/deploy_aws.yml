@@ -19,12 +19,11 @@ jobs:
       - name: Publish
         run: dotnet publish ./src/CSharpSales/CSharpSales.csproj -c Release -o publish
 
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4
+      - name: Zip artifact for deployment
+        uses: montudor/action-zip@v1
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+          src: publish
+          dst: deploy.zip
 
       - name: Deploy to Elastic Beanstalk
         uses: einaregilsson/beanstalk-deploy@v21
@@ -34,5 +33,5 @@ jobs:
           application_name: sales-develop
           environment_name: Sales-develop-env
           version_label: ${{ github.sha }}
-          deployment_package: publish
+          deployment_package: deploy.zip
           region: us-east-1
