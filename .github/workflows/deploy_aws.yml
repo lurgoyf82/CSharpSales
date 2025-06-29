@@ -1,28 +1,34 @@
+name: Deploy CSharpSales .NET9 AWS
+
 on:
   push:
-    branches: [ develop ]
+    branches:
+      - develop
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v4
+  
+      - name: Setup .NET 9
+        uses: actions/setup-dotnet@v4
         with: 
           dotnet-version: '9.0.x'
-      - run: |
-          dotnet publish ./src/CSharpSales/CSharpSales.csproj -c Release -o publish
-          cd publish
-          zip -r deploy.zip .
-      - uses: aws-actions/configure-aws-credentials@v4
+          
+      - name: Publish and Zip
+        run: |
+            dotnet publish ./src/CSharpSales/CSharpSales.csproj -c Release -o publish
+            cd publish
+            zip -r ../deploy.zip .
+
+      - name: Deploy to Elastic Beanstalk
+        uses: einaregilsson/beanstalk-deploy@v21
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
-      - uses: einaregilsson/beanstalk-deploy@v21
-        with:
-          application_name: CSharpSales
-          environment_name: CSharpSales-env
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          application_name: sales-develop
+          environment_name: Sales-develop-env
           version_label: ${{ github.sha }}
+          deployment_package: deploy.zip
           region: us-east-1
-          deployment_package: publish/deploy.zip

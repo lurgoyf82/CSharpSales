@@ -1,4 +1,4 @@
-name: Deploy CSharpSales .NET9 App
+name: Deploy CSharpSales .NET9 VM
 
 on:
   push:
