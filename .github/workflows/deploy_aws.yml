@@ -16,14 +16,10 @@ jobs:
         with: 
           dotnet-version: '9.0.x'
           
-      - name: Publish
-        run: dotnet publish ./src/CSharpSales/CSharpSales.csproj -c Release -o publish
-
-      - name: Zip artifact for deployment
-        uses: montudor/action-zip@v1
-        with:
-          src: publish
-          dst: deploy.zip
+      - name: Publish and Zip
+        run: dotnet publish ./src/CSharpSales/CSharpSales.csproj -c Release -o publish && \
+             cd publish && \ 
+             zip -r ../deploy.zip .
 
       - name: Deploy to Elastic Beanstalk
         uses: einaregilsson/beanstalk-deploy@v21
