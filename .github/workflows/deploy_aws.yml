@@ -3,7 +3,7 @@ name: Deploy CSharpSales .NET9 AWS
 on:
   push:
     branches:
-      - develop
+      - master
 
 jobs:
   deploy:
