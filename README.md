@@ -6,11 +6,11 @@ Items are parsed from a simple text format, taxes are applied according to their
 1. Ensure you have the [.NET SDK 9](https://dotnet.microsoft.com/) installed.
 2. Build and start the API:
 
-   ```bash
-   dotnet run --project CSharpSales
+   ```
+      I Advice starting CSharpSales with IIS Express
    ```
 
-   The application listens on `https://localhost:5001` by default (check the console output for the exact port).
+   The application listens on `https://localhost:44310` by default (check the console output for the exact port).
 
 ## Testing the API
 
@@ -20,10 +20,14 @@ The service exposes a single POST endpoint:
 
 Several options are available to exercise the API:
 
-* **Swagger UI** – browse to `https://localhost:5001/swagger` after the app starts and invoke the endpoint directly from the documentation page.
-* **Postman** – send a POST request to `https://localhost:5001/GetCartResponse` then select raw body and finally select JSON.
+* **Swagger UI** – browse to `https://localhost:44310/swagger` after the app starts and invoke the endpoint directly from the documentation page.
+* **Postman** – send a POST request to `https://localhost:44310/GetCartResponse` then select raw body and finally select JSON.
 * **AWS** - http://sales-develop.us-east-1.elasticbeanstalk.com/GetCartResponse
+* **AWS** - http://sales-develop.us-east-1.elasticbeanstalk.com/swagger
 * **VM** - http://sales.raphp.net/GetCartResponse
+* **VM** - https://sales.raphp.net/swagger
+
+* **HTTP Client** – Or visit https://angular.raphp.net/ to use the Angular frontend client.
 
 Example:
 
@@ -51,16 +55,11 @@ And this should be returned:
 }
 ```
 
-The response will include the formatted receipt lines, the total sales taxes and the overall total.
-
-* **HTTP file** – the repository also contains `CSharpSales.http` which can be used with the Visual Studio HTTP client.
-* **Angular frontend** – a simple client application is planned and will be added soon.
-
-The current deployed server for GitHub Actions pipeline is accessible at `http://sales.raphp.net:5001/GetCartResponse` for direct testing.
-
 ### Automated Deployment
 
-This application is automatically deployed via a GitHub Actions pipeline configured in `.github/workflows/deploy.yml`.
+This application is automatically deployed via a GitHub Actions pipeline configured in `.github/workflows/deploy.yml` and `.github/workflows/deploy-aws.yml`.
+
+The pipeline handles the build and deployment processes for both AWS Elastic Beanstalk and a private VM.
 Each push to the `master` branch triggers the build and deploy steps:
 
 1. **Build and Publish:** Compiles the .NET9 application.
@@ -68,6 +67,11 @@ Each push to the `master` branch triggers the build and deploy steps:
 3. **Service Restart:** Restarts the application on the server via SSH.
 
 The deployment pipeline ensures continuous delivery of the latest version directly to the production environment.
+
+## Extra
+
+An ulterior solution written in PHP is available at https://github.com/lurgoyf82/PhpSales, it is a simple PHP script 
+that runs on docker ... it was more of a proof of concept than a real solution, but it is there for reference.
 
 ## License
 
